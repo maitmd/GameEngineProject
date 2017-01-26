@@ -3,36 +3,54 @@ package com.tumblr.midnightchipmunk;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
 public class Entity{
 
-	private BufferedImage image;
-	private String entityType;
-	private int x;
-	private int y;
-	private double health;
-	private double attack;
-	private String facing;
-	private Map map;
+	protected BufferedImage image;
+	protected String entityType;
+	protected int x;
+	protected int y;
+	protected double health;
+	protected double attack;
+	protected String facing;
+	protected Map map;
+	
+	protected int timer;
+	protected int delay;
+	protected ArrayList<Integer> delayedX = new ArrayList<Integer>();
+	protected ArrayList<Integer> delayedY = new ArrayList<Integer>();
+	protected ArrayList<Particle> delayedParticle = new ArrayList<Particle>();
+	protected boolean delayedAttack;
 	
 	public Entity(BufferedImage image, String entityType, int x, int y, double health, double attack, Map map){
 		this.image = image;
 		this.entityType = entityType;
-		this.x = x;
-		this.y = y;
+		this.x = x+1;
+		this.y = y+1;
 		this.health = health;
 		this.attack = attack;
 		this.map = map;
 		facing = randomFacing();
 	}	
 	
+	public Entity(BufferedImage image, int x, int y, Map map){
+		this.image = image;
+		this.x = x+1;
+		this.y = y+1;
+		this.map = map;
+		health = 0;
+		attack = 0;
+		entityType = "entity";
+	}
+	
 	public Entity(String entityType, int x, int y, double health, double attack, Map map) throws IOException{
 		image = ImageIO.read(new File("resources/NoTexture.png"));
 		this.entityType = entityType;
-		this.x = x;
-		this.y = y;
+		this.x = x+1;
+		this.y = y+1;
 		this.health = health;
 		this.attack = attack;
 		this.map = map;
@@ -42,8 +60,8 @@ public class Entity{
 	public Entity(int x, int y, Map map) throws IOException{
 		image = ImageIO.read(new File("resources/NoTexture.png"));
 		entityType = "entity";
-		this.x = x;
-		this.y = y;
+		this.x = x+1;
+		this.y = y+1;
 		health = 5;
 		attack = 1;
 		this.map = map;
@@ -53,87 +71,102 @@ public class Entity{
 	public Entity(Map map) throws IOException{
 		image = ImageIO.read(new File("resources/NoTexture.png"));
 		entityType = "entity";
-		x = 0;
-		y = 0;
+		x = 1;
+		y = 1;
 		health = 5;
 		attack = 1;
 		this.map = map;
 		facing = randomFacing();
 	}
 	
-	public void attack(Entity entity){
+	public void attack(Entity entity, Particle particle){
 		entity.setHealth(entity.getHealth() - attack);
+		map.spawnParticle(particle);
+		
 		if(entity.getHealth() <= 0){
 			map.removeEntity(entity.getX(), entity.getY());
 		}
 	}
 	
-	public void attack(int x, int y){
+	public void attack(int x, int y, Particle particle){
 		if(map.getEntityAt(x, y) != null){
-			map.getEntityAt(x, y).setHealth(map.getEntityAt(x, y).getHealth() - attack);
-			if(map.getEntityAt(x,y).getHealth() <= 0){
-				map.removeEntity(x,y);
-			}
+			attack(map.getEntityAt(x, y), particle);
 		}
 	}
 	
-	public void randomMovement(){
+	//Waits the delay amount before attacking the designated x and y
+	public void delayedAttack(int x, int y, Particle particle, int delay){
+		timer = 0;
+		this.delay = delay;
+		delayedX.add(x);
+		delayedY.add(y);
+		delayedParticle.add(particle);
+
+		
+		delayedAttack = true;
+	}
+	
+	public void incrementDelayedAttack(){
+		if(delayedAttack){
+			timer++;
+			
+			if(timer == this.delay){
+				
+				attack(delayedX.remove(delayedX.size()-1), delayedY.remove(delayedX.size()-1), delayedParticle.remove(delayedX.size()-1));
+				
+				timer = 0;
+				delayedAttack = false;
+
+			}
+			
+		}
+	}
+	
+	public void randomMovement()throws IOException{
 		int random = (int)(Math.random()*100);
 		
 		if(random < 5){
-			try{
 				int moveRandom = (int)(Math.random()*4);
-				boolean temp;
 				switch(moveRandom){
 					case 0:
-						temp = map.moveEntity(getX(), getY(), getX(), getY()-1);
 						
 						setFacing("up");
 						setImage(ImageIO.read(new File("resources/" + entityType + "Up.png")));
 						
-						if(temp){
+						if(getY() > 1){
 							setY(getY()-1);
 						}
 						
 						break;
 					case 1:
-						temp = map.moveEntity(getX(), getY(), getX(), getY()+1);
-						
 						setFacing("down");
 						setImage(ImageIO.read(new File("resources/" + entityType + "Down.png")));
 						
-						if(temp){
+						if(getY() < Display.MAX_Y){
 							setY(getY()+1);
 						}
 						
 						break;
 					case 2:
-						temp = map.moveEntity(getX(), getY(), getX()-1, getY());
-						
 						setFacing("left");
 						setImage(ImageIO.read(new File("resources/" + entityType + "Left.png")));
 						
-						if(temp){
+						if(getX() > 1){
 							setX(getX()-1);
 						}
 						
 						break;
 						
 					case 3:
-						temp = map.moveEntity(getX(), getY(), getX()+1, getY());
-						
 						setFacing("right");
 						setImage(ImageIO.read(new File("resources/" + entityType + "Right.png")));
 						
-						if(temp){
+						if(getX() < Display.MAX_X){
 							setX(getX()+1);
 						}
 						
 						break;
 					}
-			}catch(Exception e){
-				e.printStackTrace();
-			}
 		}
 	}
 	
@@ -163,6 +196,10 @@ public class Entity{
 	
 	public String getFacing(){
 		return facing;
+	}
+	
+	public Map getMap(){
+		return map;
 	}
 	
 	public void setAttack(double attack){

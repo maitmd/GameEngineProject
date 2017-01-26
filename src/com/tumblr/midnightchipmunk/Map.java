@@ -2,93 +2,82 @@ package com.tumblr.midnightchipmunk;
 
 import java.util.ArrayList;
 
-class Map {
+public class Map {
 
-	private Entity[][] grid =  new Entity[Display.MAX_X][Display.MAX_Y];
-	
-	public Map(){
-		for(int i = 0; i < grid[0].length; i++){
-			for(int j = 0; j < grid.length; j++){
-				grid[i][j] = null;
-			}
-		}
-	}
-	
-	public Entity[][] getMap(){
-		return grid;
+	//Creating grid for entity storage
+	private ArrayList<Entity> entities;
+	private ArrayList<Particle> particles;
+			
+	//Initializing map
+	public Map(){	
+		entities = new ArrayList<Entity>();
+		particles= new ArrayList<Particle>();
 	}
 	
 	public void spawnEntity(Entity entity){
-		if(grid[entity.getX()][entity.getY()] == null){
-			grid[entity.getX()][entity.getY()] = entity;
-			System.out.println("Spawned " + entity.getEntityType() + " " + entity + " at " + entity.getX() + "," + entity.getY());
-		}else{
-			System.out.println("Could not spawn the entity there!");
-		}
+		entities.add(entity);
 	}
 
-	public Entity getEntityAt(int x, int y){
-		try{
-			if(grid[x][y] != null){
-				return grid[x][y];
-			}else{
-				return null;
+	public void spawnParticle(Particle particle){
+		particles.add(particle);
+	}
+	
+	public Entity getEntityAt(double x, double y){
+		for(int i = 0; i < entities.size(); i++){
+			if(entities.get(i).getX() == x && entities.get(i).getY() == y){
+				return entities.get(i);
 			}
-		}catch(IndexOutOfBoundsException e){
-			return null;
 		}
+		
+		return null;
 	}
 	 
+	public Particle getParticleAt(int x, int y){
+		for(int i = 0; i < particles.size(); i++){
+			if(particles.get(i).getX() == x && particles.get(i).getY() == y){
+				return particles.get(i);
+			}
+		}
+		
+		return null;
+	}
+	
 	public Entity getEntity(String type){
-		for(Entity[] temp:grid){
-			for(Entity temp2:temp){
-				if(temp2 != null && temp2.getEntityType().equals(type)){
-						return temp2;
-				}
+		for(Entity temp:entities){
+			if(temp != null && temp.getEntityType().equals(type)){
+				return temp;
 			}
 		}
 		return null;
 	}
 	
-	public ArrayList<Entity> getAllEntities(String type){
-		ArrayList<Entity> list = new ArrayList<Entity>();
-		
-		for(int i = 0; i < grid[0].length; i++){
-			for(int j = 0; j < grid.length; j++){
-				if(grid[i][j] != null && grid[i][j].getEntityType().equals(type)){
-					list.add(grid[i][j]);
-				}
-			}
-		}
-		
-		return list;
-	}
-	
 	public ArrayList<Entity> getAllEntities(){
-		ArrayList<Entity> list = new ArrayList<Entity>();
-		
-		for(int i = 0; i < grid[0].length; i++){
-			for(int j = 0; j < grid.length; j++){
-				if(grid[i][j] != null && !grid[i][j].getEntityType().equals("player")){
-					list.add(grid[i][j]);
-				}
-			}
-		}
-		
-		return list;
+		return entities;
 	}
 	
-	public boolean moveEntity(int currentx, int currenty, int newx, int newy){
-		if(grid[newx][newy] == null){
-			grid[newx][newy] = grid[currentx][currenty];
-			grid[currentx][currenty] = null;
-			return true;
-		}
-		
-		return false;
+	public ArrayList<Particle> getAllParticles(){
+		return particles;
 	}
 	
 	public void removeEntity(int x, int y){
-		grid[x][y] = null;
+		for(int i = 0; i < entities.size(); i++){
+			if(entities.get(i).getX() == x && entities.get(i).getY() == y){
+				entities.remove(i);
+			}
+		}
+	}
+	
+	public void removeParticle(int x, int y){
+		for(int i = 0; i < particles.size(); i++){
+			if(particles.get(i).getX() == x && particles.get(i).getY() == y){
+				particles.remove(i);
+			}
+		}
+	}
+	
+	public void removeAllParticles(){
+		for(int i = 0; i < particles.size(); i++){
+				particles.remove(i);
+		}
 	}
 }
