@@ -96,26 +96,34 @@ public class Entity{
 	
 	//Waits the delay amount before attacking the designated x and y
 	public void delayedAttack(int x, int y, Particle particle, int delay){
-		timer = 0;
+		
 		this.delay = delay;
-		delayedX.add(x);
-		delayedY.add(y);
-		delayedParticle.add(particle);
-
+		
+		if(map.getEntityAt(x,y) != null){
+			delayedX.add(x);
+			delayedY.add(y);
+			delayedParticle.add(particle);
+		}
 		
 		delayedAttack = true;
 	}
 	
 	public void incrementDelayedAttack(){
 		if(delayedAttack){
-			timer++;
-			
-			if(timer == this.delay){
+			timer+=1;
+
+			if(timer == delay){
 				
-				attack(delayedX.remove(delayedX.size()-1), delayedY.remove(delayedX.size()-1), delayedParticle.remove(delayedX.size()-1));
+				attack(delayedX.get(0), delayedY.get(0), delayedParticle.get(0));
 				
+				delayedX.remove(0);
+				delayedY.remove(0);
+
 				timer = 0;
-				delayedAttack = false;
+				
+				if(delayedX.size() <= 0){
+					delayedAttack = false;
+				}	
 
 			}
 			

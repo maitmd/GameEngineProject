@@ -28,7 +28,8 @@ public class ArtillaryWorm extends Entity implements Hostile{
 		rechargeTimer = 0;
 		rechargeDelay = 5;
 		attackTimer = 0;
-		attackDelay = 20;
+		attackDelay = 10;
+	
 	}
 
 	public void searchForTarget() {
@@ -49,10 +50,7 @@ public class ArtillaryWorm extends Entity implements Hostile{
 					if(entityRight instanceof Player){
 						
 						try {
-							
-							getMap().spawnParticle(new PoisonMarker(entityRight.getX(), entityRight.getY(), getMap()));
-							delayedAttack(entityRight.getX(), entityRight.getY(), new Empty(entityRight.getX(), entityRight.getY(), getMap()), attackDelay);
-							
+							delayedAttack(entityRight.getX(), entityRight.getY(), new PoisonMarker(entityRight.getX(), entityRight.getY(), getMap()), attackDelay);
 						} catch (IOException e) {
 						}
 						
@@ -60,7 +58,7 @@ public class ArtillaryWorm extends Entity implements Hostile{
 						
 						try {
 							getMap().spawnParticle(new PoisonMarker(entityLeft.getX(), entityLeft.getY(), getMap()));
-							delayedAttack(entityLeft.getX(), entityLeft.getY(), new Empty(entityLeft.getX(), entityLeft.getY(), getMap()), attackDelay);
+							delayedAttack(entityLeft.getX(), entityLeft.getY(), new PoisonMarker(entityLeft.getX(), entityLeft.getY(), getMap()), attackDelay);
 						} catch (IOException e) {
 						}
 						
@@ -68,7 +66,7 @@ public class ArtillaryWorm extends Entity implements Hostile{
 						
 						try {
 							getMap().spawnParticle(new PoisonMarker(entityUp.getX(), entityUp.getY(), getMap()));
-							delayedAttack(entityUp.getX(), entityUp.getY(), new Empty(entityUp.getX(), entityUp.getY(), getMap()), attackDelay);
+							delayedAttack(entityUp.getX(), entityUp.getY(), new PoisonMarker(entityUp.getX(), entityUp.getY(), getMap()), attackDelay);
 						} catch (IOException e) {
 						}
 						
@@ -76,7 +74,7 @@ public class ArtillaryWorm extends Entity implements Hostile{
 						
 						try {
 							getMap().spawnParticle(new PoisonMarker(entityDown.getX(), entityDown.getY(), getMap()));
-							delayedAttack(entityDown.getX(), entityDown.getY(), new Empty(entityDown.getX(), entityDown.getY(), getMap()), attackDelay);
+							delayedAttack(entityDown.getX(), entityDown.getY(), new PoisonMarker(entityDown.getX(), entityDown.getY(), getMap()), attackDelay);
 						} catch (IOException e) {
 						}
 						
@@ -84,7 +82,7 @@ public class ArtillaryWorm extends Entity implements Hostile{
 						
 						try {
 							getMap().spawnParticle(new PoisonMarker(entityRightUp.getX(), entityRightUp.getY(), getMap()));
-							delayedAttack(entityRightUp.getX(), entityRightUp.getY(), new Empty(entityRightUp.getX(), entityRightUp.getY(), getMap()), attackDelay);
+							delayedAttack(entityRightUp.getX(), entityRightUp.getY(), new PoisonMarker(entityRightUp.getX(), entityRightUp.getY(), getMap()), attackDelay);
 						} catch (IOException e) {
 						}
 						
@@ -92,7 +90,7 @@ public class ArtillaryWorm extends Entity implements Hostile{
 						
 						try {
 							getMap().spawnParticle(new PoisonMarker(entityRightDown.getX(), entityRightDown.getY(), getMap()));
-							delayedAttack(entityRightDown.getX(), entityRightDown.getY(), new Empty(entityRightDown.getX(), entityRightDown.getY(), getMap()), attackDelay);
+							delayedAttack(entityRightDown.getX(), entityRightDown.getY(), new PoisonMarker(entityRightDown.getX(), entityRightDown.getY(), getMap()), attackDelay);
 						} catch (IOException e) {
 						}
 						
@@ -100,7 +98,7 @@ public class ArtillaryWorm extends Entity implements Hostile{
 						
 						try {
 							getMap().spawnParticle(new PoisonMarker(entityLeftUp.getX(), entityLeftUp.getY(), getMap()));
-							delayedAttack(entityLeftUp.getX(), entityLeftUp.getY(), new Empty(entityLeftUp.getX(), entityLeftUp.getY(), getMap()), attackDelay);
+							delayedAttack(entityLeftUp.getX(), entityLeftUp.getY(), new PoisonMarker(entityLeftUp.getX(), entityLeftUp.getY(), getMap()), attackDelay);
 						} catch (IOException e) {
 						}
 						
@@ -108,7 +106,7 @@ public class ArtillaryWorm extends Entity implements Hostile{
 						
 						try {
 							getMap().spawnParticle(new PoisonMarker(entityLeftDown.getX(), entityLeftDown.getY(), getMap()));
-							delayedAttack(entityLeftDown.getX(), entityLeftDown.getY(), new Empty(entityLeftDown.getX(), entityLeftDown.getY(), getMap()), attackDelay);
+							delayedAttack(entityLeftDown.getX(), entityLeftDown.getY(), new PoisonMarker(entityLeftDown.getX(), entityLeftDown.getY(), getMap()), attackDelay);
 						} catch (IOException e) {
 						}
 						
