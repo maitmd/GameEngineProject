@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import particles.com.tumblr.midnightchipmunk.Empty;
+
 public class Entity{
 
 	protected BufferedImage image;
@@ -98,9 +100,19 @@ public class Entity{
 		}
 	}
 	
+	public void attack(Entity entity) throws IOException{
+		attack(entity, new Empty(getX(), getY(), getMap()));
+	}
+	
 	public void attack(int x, int y, Particle particle){
 		if(map.getEntityAt(x, y) != null){
 			attack(map.getEntityAt(x, y), particle);
+		}
+	}
+	
+	public void attack(int x, int y) throws IOException{
+		if(map.getEntityAt(x, y) != null){
+			attack(map.getEntityAt(x, y), new Empty(getX(), getY(), getMap()));
 		}
 	}
 	
@@ -108,8 +120,8 @@ public class Entity{
 		
 		ArrayList<Entity> entities = new ArrayList<Entity>();
 		
-		for(int i = 1; i <= range; i++){
-			for(int j = 1; j <= range; j++){
+		for(int i = 0; i <= range; i++){
+			for(int j = 0; j <= range; j++){
 				entities.add(getMap().getEntityAt((this.getX()+i), (this.getY())));
 				entities.add(getMap().getEntityAt((this.getX()-i), (this.getY())));
 				entities.add(getMap().getEntityAt((this.getX()), (this.getY()-j)));
@@ -119,6 +131,13 @@ public class Entity{
 				entities.add(getMap().getEntityAt((this.getX()-i), (this.getY()-j)));
 				entities.add(getMap().getEntityAt((this.getX()-i), (this.getY()+j)));
 			}
+		}
+		
+		for(int i = 0; i < entities.size(); i++){
+			if(entities.get(i) == this){
+				entities.set(i, null);
+			}
+			System.out.println(entities.get(i));
 		}
 		
 		return entities;

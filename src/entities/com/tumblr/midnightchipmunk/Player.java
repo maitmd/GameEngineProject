@@ -20,7 +20,7 @@ public class Player extends Entity implements KeyListener{
 	private boolean attackCheck = false;
 	
 	public Player(int x, int y, Map map) throws IOException{
-		super("player", x, y,  10, 5, map);
+		super("player", x, y,  1000, 5, map);
 		
 		if(getFacing().equals("up")){
 			setImage(ImageIO.read(new File("resources/PlayerUp.png")));
@@ -114,29 +114,29 @@ public class Player extends Entity implements KeyListener{
 	public void attack() throws Exception{
 		
 		if(getFacing().equals("down")){
+			attack(getX()-1, getY());
+			attack(getX()+1, getY()+1);
+			attack(getX()-1, getY()+1);
+			attack(getX(), getY()+1);
 			attack(getX()+1, getY(), new Sweep(getX(), getY(), getMap(), getFacing()));
-			attack(getX()-1, getY(), new Empty(getX(), getY(), getMap()));
-			attack(getX()+1, getY()+1, new Empty(getX(), getY(), getMap()));
-			attack(getX()-1, getY()+1, new Empty(getX(), getY(), getMap()));
-			attack(getX(), getY()+1, new Empty(getX(), getY(), getMap()));
 		}else if(getFacing().equals("up")){
+			attack(getX()-1, getY());
+			attack(getX()+1, getY()-1);
+			attack(getX()-1, getY()-1);
+			attack(getX(), getY()-1);
 			attack(getX()+1, getY(), new Sweep(getX(), getY(), getMap(), getFacing()));
-			attack(getX()-1, getY(), new Empty(getX(), getY(), getMap()));
-			attack(getX()+1, getY()-1, new Empty(getX(), getY(), getMap()));
-			attack(getX()-1, getY()-1, new Empty(getX(), getY(), getMap()));
-			attack(getX(), getY()-1, new Empty(getX(), getY(), getMap()));
 		}else if(getFacing().equals("right")){
-			attack(getX(), getY()+1, new Sweep(getX(), getY(), getMap(), getFacing()));
 			attack(getX(), getY()-1, new Empty(getX(), getY(), getMap()));
 			attack(getX()+1, getY()+1, new Empty(getX(), getY(), getMap()));
 			attack(getX()+1, getY()-1, new Empty(getX(), getY(), getMap()));
 			attack(getX()+1, getY(), new Empty(getX(), getY(), getMap()));
+			attack(getX(), getY()+1, new Sweep(getX(), getY(), getMap(), getFacing()));
 		}else if(getFacing().equals("left")){
-			attack(getX(), getY()-1, new Sweep(getX(), getY(), getMap(), getFacing()));
 			attack(getX(), getY()+1, new Empty(getX(), getY(), getMap()));
 			attack(getX()-1, getY()+1, new Empty(getX(), getY(), getMap()));
 			attack(getX()-1, getY()-1, new Empty(getX(), getY(), getMap()));
 			attack(getX()-1, getY(), new Empty(getX(), getY(), getMap()));
+			attack(getX(), getY()-1, new Sweep(getX(), getY(), getMap(), getFacing()));
 		}
 	}
 }

@@ -60,9 +60,9 @@ public class Display implements ActionListener {
 			
 			if(!(entity instanceof Player)){
 				
-				try{
-					entity.randomMovement();
-				}catch (IOException e2){}
+				//try{
+					//entity.randomMovement();
+				//}catch (IOException e2){}
 				
 				if(entity instanceof Neutral){
 					if(entity instanceof Wisp){
@@ -96,10 +96,7 @@ public class Display implements ActionListener {
 			player = new Player((int)(Math.random()*MAX_X), (int)(Math.random()*MAX_Y), map);
 			
 			map.spawnEntity(player);
-			map.spawnEntity(new Entity(5,7,map));
-			map.spawnEntity(new Entity(6,7,map));
-			map.spawnEntity(new Entity(7,7,map));
-			map.spawnEntity(new ArtillaryWorm(6,9,map));
+			map.spawnEntity(new Wisp(5,7,map));
 			
 		} catch (IOException e) {
 			//Making sure no overlapping entities (Needs fixing)
