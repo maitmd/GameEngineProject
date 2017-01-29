@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 
 import entities.com.tumblr.midnightchipmunk.ArtillaryWorm;
+import entities.com.tumblr.midnightchipmunk.ArtillaryWormAttack;
 import entities.com.tumblr.midnightchipmunk.Player;
 import entities.com.tumblr.midnightchipmunk.Wisp;
 
@@ -61,7 +62,6 @@ public class Display implements ActionListener {
 				
 				try{
 					entity.randomMovement();
-					entity.incrementDelayedAttack();
 				}catch (IOException e2){}
 				
 				if(entity instanceof Neutral){
@@ -73,6 +73,8 @@ public class Display implements ActionListener {
 					if(entity instanceof ArtillaryWorm){
 						((ArtillaryWorm)entity).searchForTarget();
 					}
+				}else if(entity instanceof ArtillaryWormAttack){
+					((ArtillaryWormAttack)entity).incrementDelayedAttack();
 				}
 			}
 		}

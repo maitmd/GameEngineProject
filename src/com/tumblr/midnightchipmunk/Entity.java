@@ -41,8 +41,18 @@ public class Entity{
 		this.x = x+1;
 		this.y = y+1;
 		this.map = map;
-		health = 0;
-		attack = 0;
+		health = 1;
+		attack = 1;
+		entityType = "entity";
+	}
+	
+	public Entity(BufferedImage image, int x, int y, double health, double attack, Map map){
+		this.image = image;
+		this.x = x+1;
+		this.y = y+1;
+		this.map = map;
+		this.health = health;
+		this.attack = attack;
 		entityType = "entity";
 	}
 	
@@ -94,40 +104,24 @@ public class Entity{
 		}
 	}
 	
-	//Waits the delay amount before attacking the designated x and y
-	public void delayedAttack(int x, int y, Particle particle, int delay){
+	public ArrayList<Entity> getNearbyEntities(int range){
 		
-		this.delay = delay;
+		ArrayList<Entity> entities = new ArrayList<Entity>();
 		
-		if(map.getEntityAt(x,y) != null){
-			delayedX.add(x);
-			delayedY.add(y);
-			delayedParticle.add(particle);
-		}
-		
-		delayedAttack = true;
-	}
-	
-	public void incrementDelayedAttack(){
-		if(delayedAttack){
-			timer+=1;
-
-			if(timer == delay){
-				
-				attack(delayedX.get(0), delayedY.get(0), delayedParticle.get(0));
-				
-				delayedX.remove(0);
-				delayedY.remove(0);
-
-				timer = 0;
-				
-				if(delayedX.size() <= 0){
-					delayedAttack = false;
-				}	
-
+		for(int i = 1; i <= range; i++){
+			for(int j = 1; j <= range; j++){
+				entities.add(getMap().getEntityAt((this.getX()+i), (this.getY())));
+				entities.add(getMap().getEntityAt((this.getX()-i), (this.getY())));
+				entities.add(getMap().getEntityAt((this.getX()), (this.getY()-j)));
+				entities.add(getMap().getEntityAt((this.getX()), (this.getY()+j)));
+				entities.add(getMap().getEntityAt((this.getX()+i), (this.getY()-j)));
+				entities.add(getMap().getEntityAt((this.getX()+i), (this.getY()+j)));
+				entities.add(getMap().getEntityAt((this.getX()-i), (this.getY()-j)));
+				entities.add(getMap().getEntityAt((this.getX()-i), (this.getY()+j)));
 			}
-			
 		}
+		
+		return entities;
 	}
 	
 	public void randomMovement()throws IOException{

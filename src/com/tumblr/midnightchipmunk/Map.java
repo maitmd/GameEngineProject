@@ -67,10 +67,26 @@ public class Map {
 		}
 	}
 	
+	public void removeEntity(Entity entity){
+		for(int i = 0; i < entities.size(); i++){
+			if(entities.get(i) == entity){
+				entities.remove(i);
+			}
+		}
+	}
+	
 	public void removeParticle(int x, int y){
 		for(int i = 0; i < particles.size(); i++){
 			if(particles.get(i).getX() == x && particles.get(i).getY() == y){
 				particles.remove(i);
+			}
+		}
+	}
+	
+	public void removeParticle(Particle particle){
+		for(int i = 0; i < particles.size(); i++){
+			if(particles.get(i) == particle){
+					particles.remove(i);
 			}
 		}
 	}

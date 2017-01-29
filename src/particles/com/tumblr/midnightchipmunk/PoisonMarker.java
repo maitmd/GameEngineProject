@@ -19,7 +19,7 @@ public class PoisonMarker extends Particle{
 		
 		if(timer == removeDelay){
 			try {
-				getMap().removeParticle(getX(), getY());
+				getMap().removeParticle(this);
 				getMap().spawnParticle(new PoisonPuddle(getX(), getY(), getMap()));
 			} catch (IOException e) {}
 			
