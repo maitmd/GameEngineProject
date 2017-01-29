@@ -112,7 +112,6 @@ public class Player extends Entity implements KeyListener{
 	}
 	
 	public void attack() throws Exception{
-		
 		if(getFacing().equals("down")){
 			attack(getX()-1, getY());
 			attack(getX()+1, getY()+1);

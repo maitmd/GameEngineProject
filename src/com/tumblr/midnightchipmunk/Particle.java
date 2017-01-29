@@ -83,11 +83,11 @@ public class Particle{
 	}
 	
 	public void setXOffset(int xOffset){
-		this.xOffset = xOffset;
+		this.x= (x+1)+xOffset;
 	}
 	
 	public void setYOffset(int yOffset){
-		this.yOffset = yOffset;
+		this.y = (y+1)+yOffset;
 	}
 	
 	public void setTimer(int timer){

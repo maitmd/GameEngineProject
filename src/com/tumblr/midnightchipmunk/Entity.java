@@ -105,6 +105,7 @@ public class Entity{
 	}
 	
 	public void attack(int x, int y, Particle particle){
+		map.spawnParticle(particle);
 		if(map.getEntityAt(x, y) != null){
 			attack(map.getEntityAt(x, y), particle);
 		}
