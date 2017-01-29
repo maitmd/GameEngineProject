@@ -86,7 +86,7 @@ public class Map {
 	public void removeParticle(Particle particle){
 		for(int i = 0; i < particles.size(); i++){
 			if(particles.get(i) == particle){
-					particles.remove(i);
+				particles.remove(i);
 			}
 		}
 	}

@@ -137,7 +137,6 @@ public class Entity{
 			if(entities.get(i) == this){
 				entities.set(i, null);
 			}
-			System.out.println(entities.get(i));
 		}
 		
 		return entities;
