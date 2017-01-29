@@ -60,9 +60,9 @@ public class Display implements ActionListener {
 			
 			if(!(entity instanceof Player)){
 				
-				//try{
-					//entity.randomMovement();
-				//}catch (IOException e2){}
+				try{
+					entity.randomMovement();
+				}catch (IOException e2){}
 				
 				if(entity instanceof Neutral){
 					if(entity instanceof Wisp){
@@ -74,7 +74,9 @@ public class Display implements ActionListener {
 						((ArtillaryWorm)entity).searchForTarget();
 					}
 				}else if(entity instanceof ArtillaryWormAttack){
-					((ArtillaryWormAttack)entity).incrementDelayedAttack();
+					try {
+						((ArtillaryWormAttack)entity).incrementDelayedAttack();
+					} catch (IOException e1) {}
 				}
 			}
 		}

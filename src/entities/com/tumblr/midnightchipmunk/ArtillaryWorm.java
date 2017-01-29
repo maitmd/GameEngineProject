@@ -43,8 +43,7 @@ public class ArtillaryWorm extends Entity implements Hostile{
 				
 				if(temp instanceof Player){
 					try {
-						getMap().spawnParticle(new PoisonMarker(temp.getX(), temp.getY(), getMap()));
-						getMap().spawnEntity(new ArtillaryWormAttack(temp.getX(), temp.getY(), getMap(), attackDelay, getHealth(), getAttack(), new PoisonPuddle(temp.getX(), temp.getY(), getMap())));
+						getMap().spawnEntity(new ArtillaryWormAttack(temp.getX(), temp.getY(), getMap(), attackDelay, getHealth(), getAttack()));
 					} catch (IOException e) {}
 				}	
 					
