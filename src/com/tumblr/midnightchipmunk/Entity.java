@@ -150,44 +150,50 @@ public class Entity{
 				int moveRandom = (int)(Math.random()*4);
 				switch(moveRandom){
 					case 0:
-						
-						setFacing("up");
-						setImage(ImageIO.read(new File("resources/" + entityType + "Up.png")));
-						
-						if(getY() > 1){
-							setY(getY()-1);
-						}
-						
+						move("up");
 						break;
 					case 1:
-						setFacing("down");
-						setImage(ImageIO.read(new File("resources/" + entityType + "Down.png")));
-						
-						if(getY() < Display.MAX_Y){
-							setY(getY()+1);
-						}
-						
+						move("down");
 						break;
 					case 2:
-						setFacing("left");
-						setImage(ImageIO.read(new File("resources/" + entityType + "Left.png")));
-						
-						if(getX() > 1){
-							setX(getX()-1);
-						}
-						
+						move("left");
 						break;
-						
 					case 3:
-						setFacing("right");
-						setImage(ImageIO.read(new File("resources/" + entityType + "Right.png")));
-						
-						if(getX() < Display.MAX_X){
-							setX(getX()+1);
-						}
-						
+						move("right");
 						break;
 					}
+		}
+	}
+	
+	public void move(String direction) throws IOException{
+		if(direction.equals("right")){
+			setFacing("right");
+			setImage(ImageIO.read(new File("resources/" + entityType + "Right.png")));
+			
+			if(getX() < Display.MAX_X){
+				setX(getX()+1);
+			}
+		}else if(direction.equals("left")){
+			setFacing("left");
+			setImage(ImageIO.read(new File("resources/" + entityType + "Left.png")));
+			
+			if(getX() > 1){
+				setX(getX()-1);
+			}
+		}else if(direction.equals("up")){
+			setFacing("up");
+			setImage(ImageIO.read(new File("resources/" + entityType + "Up.png")));
+			
+			if(getY() > 1){
+				setY(getY()-1);
+			}
+		}else if(direction.equals("down")){
+			setFacing("down");
+			setImage(ImageIO.read(new File("resources/" + entityType + "Down.png")));
+			
+			if(getY() < Display.MAX_Y){
+				setY(getY()+1);
+			}
 		}
 	}
 	

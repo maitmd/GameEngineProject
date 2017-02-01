@@ -8,9 +8,6 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import particles.com.tumblr.midnightchipmunk.PoisonMarker;
-import particles.com.tumblr.midnightchipmunk.PoisonPuddle;
-
 import com.tumblr.midnightchipmunk.Entity;
 import com.tumblr.midnightchipmunk.Map;
 

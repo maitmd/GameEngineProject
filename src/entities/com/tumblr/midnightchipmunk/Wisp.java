@@ -47,6 +47,9 @@ public class Wisp extends Entity implements Neutral{
 	}
 	
 	public void trigger() throws IOException{
+		
+		randomMovement();
+		
 		for(int i = 0; i <= detectionRadius; i++){
 			for(int j = 0; j <= detectionRadius; j++){
 

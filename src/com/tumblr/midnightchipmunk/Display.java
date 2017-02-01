@@ -2,6 +2,7 @@ package com.tumblr.midnightchipmunk;
 
 import interfaces.com.tumblr.midnightchipmunk.Hostile;
 import interfaces.com.tumblr.midnightchipmunk.Neutral;
+import interfaces.com.tumblr.midnightchipmunk.Passive;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,6 +17,7 @@ import javax.swing.Timer;
 import entities.com.tumblr.midnightchipmunk.ArtillaryWorm;
 import entities.com.tumblr.midnightchipmunk.ArtillaryWormAttack;
 import entities.com.tumblr.midnightchipmunk.Player;
+import entities.com.tumblr.midnightchipmunk.SpikeyNosedMole;
 import entities.com.tumblr.midnightchipmunk.Wisp;
 
 public class Display implements ActionListener {
@@ -60,23 +62,14 @@ public class Display implements ActionListener {
 			
 			if(!(entity instanceof Player)){
 				
-				try{
-					entity.randomMovement();
-				}catch (IOException e2){}
-				
 				if(entity instanceof Neutral){
-					if(entity instanceof Wisp){
-						try {((Wisp)entity).trigger();
-						}catch (IOException e1){}
-					}
+					try {((Neutral) entity).trigger();} catch (IOException e1) {}
 				}else if(entity instanceof Hostile){
-					if(entity instanceof ArtillaryWorm){
-						((ArtillaryWorm)entity).searchForTarget();
-					}
+					((Hostile) entity).searchForTarget();
+				}else if(entity instanceof Passive){
+					try {entity.randomMovement();} catch (IOException e1) {}
 				}else if(entity instanceof ArtillaryWormAttack){
-					try {
-						((ArtillaryWormAttack)entity).incrementDelayedAttack();
-					} catch (IOException e1) {}
+					try {((ArtillaryWormAttack)entity).incrementDelayedAttack();} catch (IOException e1) {}
 				}
 			}
 		}
@@ -96,9 +89,8 @@ public class Display implements ActionListener {
 			//randomly place player
 			player = new Player((int)(Math.random()*MAX_X), (int)(Math.random()*MAX_Y), map);
 			
-			map.spawnEntity(player);
-			map.spawnEntity(new ArtillaryWorm(7,5,map));
-			map.spawnEntity(new Wisp(5,7,map));
+			map.spawnEntity(player);;
+			map.spawnEntity(new SpikeyNosedMole(5,5,map));
 
 		new Display();
 	}
