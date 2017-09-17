@@ -18,18 +18,26 @@ public class SpikeyNosedMole extends Entity implements Hostile{
 	int attackDelay;
 	int walkDelay;
 	int walkCounter;
+	final int MOB_ID = 0003;
 	
 	public SpikeyNosedMole(int x, int y, Map map) throws IOException {
-		super("spikeynosedmole", x, y,  1000, 5, map);
+		super();
+		
+		setEntityType("spikeynosedmole");
+		setX(x);
+		setY(y);
+		setHealth(20);
+		setAttack(5);
+		setMap(map);
 		
 		if(getFacing().equals("up")){
 			setImage(ImageIO.read(new File("resources/SpikeyNosedMoleUpRight.png")));
 		}else if(getFacing().equals("down")){
-			setImage(ImageIO.read(new File("resources/SpikeyNosedMoleDownRight.png")));
+			setImage(ImageIO.read(new File("resources/spikeynosedmoleDownRight.png")));
 		}else if(getFacing().equals("left")){
-			setImage(ImageIO.read(new File("resources/SpikeyNosedMoleLeft.png")));
+			setImage(ImageIO.read(new File("resources/spikeynosedmoleLeft.png")));
 		}else if(getFacing().equals("right")){
-			setImage(ImageIO.read(new File("resources/SpikeyNosedMoleRight.png")));
+			setImage(ImageIO.read(new File("resources/spikeynosedmoleRight.png")));
 		}
 		
 		detectionRadius = 3;

@@ -22,75 +22,20 @@ public class Entity{
 	
 	protected int timer;
 	protected int delay;
-	protected ArrayList<Integer> delayedX = new ArrayList<Integer>();
-	protected ArrayList<Integer> delayedY = new ArrayList<Integer>();
 	protected ArrayList<Particle> delayedParticle = new ArrayList<Particle>();
 	protected boolean delayedAttack;
 	
-	public Entity(BufferedImage image, String entityType, int x, int y, double health, double attack, Map map){
-		this.image = image;
-		this.entityType = entityType;
-		this.x = x+1;
-		this.y = y+1;
-		this.health = health;
-		this.attack = attack;
-		this.map = map;
+	public Entity() throws IOException{
+		this.image = ImageIO.read(new File("resources/NoTexture.png"));
+		this.entityType = "null";
+		this.x = 1;
+		this.y = 1;
+		this.health = 10;
+		this.attack = 1;
+		this.map = null;
 		facing = randomFacing();
 	}	
-	
-	public Entity(BufferedImage image, int x, int y, Map map){
-		this.image = image;
-		this.x = x+1;
-		this.y = y+1;
-		this.map = map;
-		health = 1;
-		attack = 1;
-		entityType = "entity";
-	}
-	
-	public Entity(BufferedImage image, int x, int y, double health, double attack, Map map){
-		this.image = image;
-		this.x = x+1;
-		this.y = y+1;
-		this.map = map;
-		this.health = health;
-		this.attack = attack;
-		entityType = "entity";
-	}
-	
-	public Entity(String entityType, int x, int y, double health, double attack, Map map) throws IOException{
-		image = ImageIO.read(new File("resources/NoTexture.png"));
-		this.entityType = entityType;
-		this.x = x+1;
-		this.y = y+1;
-		this.health = health;
-		this.attack = attack;
-		this.map = map;
-		facing = randomFacing();
-	}
-	
-	public Entity(int x, int y, Map map) throws IOException{
-		image = ImageIO.read(new File("resources/NoTexture.png"));
-		entityType = "entity";
-		this.x = x+1;
-		this.y = y+1;
-		health = 5;
-		attack = 1;
-		this.map = map;
-		facing = randomFacing();
-	}
-	
-	public Entity(Map map) throws IOException{
-		image = ImageIO.read(new File("resources/NoTexture.png"));
-		entityType = "entity";
-		x = 1;
-		y = 1;
-		health = 5;
-		attack = 1;
-		this.map = map;
-		facing = randomFacing();
-	}
-	
+
 	public void attack(Entity entity, Particle particle){
 		entity.setHealth(entity.getHealth() - attack);
 		map.spawnParticle(particle);
@@ -255,6 +200,10 @@ public class Entity{
 	
 	public void setFacing(String facing){
 		this.facing = facing;
+	}
+	
+	public void setMap(Map map){
+		this.map = map;
 	}
 	
 	public static String randomFacing(){

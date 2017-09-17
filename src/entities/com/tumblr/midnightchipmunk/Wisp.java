@@ -16,24 +16,20 @@ import com.tumblr.midnightchipmunk.Map;
 public class Wisp extends Entity implements Neutral{
 	
 	int detectionRadius = 1;
+	final int MOB_ID = 0001;
 	
 	public Wisp(int x, int y, Map map) throws IOException {
-		super("wisp" , x, y, 15, 1, map);
-		this.map = map;
 		
-		if(getFacing().equals("up")){
-			setImage(ImageIO.read(new File("resources/WispUp.png")));
-		}else if(getFacing().equals("down")){
-			setImage(ImageIO.read(new File("resources/WispDown.png")));
-		}else if(getFacing().equals("left")){
-			setImage(ImageIO.read(new File("resources/WispLeft.png")));
-		}else if(getFacing().equals("right")){
-			setImage(ImageIO.read(new File("resources/WispRight.png")));
-		}
-	}
-	
-	public Wisp(Map map) throws IOException {
-		super(map);
+		super();
+		
+		setEntityType("wisp");
+		setX(x);
+		setY(y);
+		setHealth(5);
+		setAttack(1);
+		setMap(map);
+		
+		this.map = map;
 		
 		if(getFacing().equals("up")){
 			setImage(ImageIO.read(new File("resources/WispUp.png")));

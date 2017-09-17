@@ -20,21 +20,14 @@ public class Player extends Entity implements KeyListener{
 	private boolean attackCheck = false;
 	
 	public Player(int x, int y, Map map) throws IOException{
-		super("player", x, y,  1000, 5, map);
+		super();
 		
-		if(getFacing().equals("up")){
-			setImage(ImageIO.read(new File("resources/PlayerUp.png")));
-		}else if(getFacing().equals("down")){
-			setImage(ImageIO.read(new File("resources/PlayerDown.png")));
-		}else if(getFacing().equals("left")){
-			setImage(ImageIO.read(new File("resources/PlayerLeft.png")));
-		}else if(getFacing().equals("right")){
-			setImage(ImageIO.read(new File("resources/PlayerRight.png")));
-		}
-	}
-	
-	public Player(Map map) throws IOException{
-		super(map);
+		setEntityType("player");
+		setX(x);
+		setY(y);
+		setHealth(2000);
+		setAttack(5);
+		setMap(map);
 		
 		if(getFacing().equals("up")){
 			setImage(ImageIO.read(new File("resources/PlayerUp.png")));

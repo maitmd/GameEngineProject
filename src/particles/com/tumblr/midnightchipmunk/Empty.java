@@ -11,7 +11,17 @@ import com.tumblr.midnightchipmunk.Particle;
 public class Empty extends Particle{
 
 	public Empty(int x, int y, Map map) throws IOException {
-		super(x, y, 0, 0, "empty", ImageIO.read(new File("resources/Empty.png")), map, 5);
+		super();
+		
+		setX(x);
+		setY(y);
+		setXOffset(0);
+		setYOffset(0);
+		setParticleName("empty");
+		setImage(ImageIO.read(new File("resources/Empty.png")));
+		setMap(map);
+		setRemoveDelay(5);
+		
 	}
 	
 }

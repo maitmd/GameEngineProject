@@ -11,7 +11,13 @@ import com.tumblr.midnightchipmunk.Particle;
 public class Sweep extends Particle{
 
 	public Sweep(int x, int y, Map map, String facing) throws IOException {
-		super(x, y, "sweep", ImageIO.read(new File("resources/NoTexture.png")), map, 5);
+		super();
+		
+		setX(x);
+		setY(y);
+		setParticleName("sweep");
+		setMap(map);
+		setRemoveDelay(5);
 		
 		if(facing.equals("down")){
 			setImage(ImageIO.read(new File("resources/SweepDown.png")));
@@ -30,6 +36,5 @@ public class Sweep extends Particle{
 			setXOffset(-2);
 			setYOffset(-2);
 		}
-			
 		}
 	}

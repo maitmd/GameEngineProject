@@ -15,6 +15,15 @@ public class Zap extends Particle{
 	ArrayList<BufferedImage> frames = new ArrayList<BufferedImage>();
 	
 	public Zap(int x, int y, Map map) throws IOException{
-		super(x, y, -2, -2, "zap", ImageIO.read(new File("resources/Zap1.png")), map, 5);
+		super();
+		
+		setX(x);
+		setY(y);
+		setXOffset(-2);
+		setYOffset(-2);
+		setParticleName("zap");
+		setImage(ImageIO.read(new File("resources/Zap1.png")));
+		setMap(map);
+		setRemoveDelay(5);
 	}
 }

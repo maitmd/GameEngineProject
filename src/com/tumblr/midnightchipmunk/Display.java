@@ -15,7 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 
 import entities.com.tumblr.midnightchipmunk.ArtillaryWorm;
-import entities.com.tumblr.midnightchipmunk.ArtillaryWormAttack;
 import entities.com.tumblr.midnightchipmunk.Player;
 import entities.com.tumblr.midnightchipmunk.SpikeyNosedMole;
 import entities.com.tumblr.midnightchipmunk.Wisp;
@@ -65,11 +64,9 @@ public class Display implements ActionListener {
 				if(entity instanceof Neutral){
 					try {((Neutral) entity).trigger();} catch (IOException e1) {}
 				}else if(entity instanceof Hostile){
-					((Hostile) entity).searchForTarget();
+					try {((Hostile) entity).searchForTarget();} catch (IOException e1){}
 				}else if(entity instanceof Passive){
 					try {entity.randomMovement();} catch (IOException e1) {}
-				}else if(entity instanceof ArtillaryWormAttack){
-					try {((ArtillaryWormAttack)entity).incrementDelayedAttack();} catch (IOException e1) {}
 				}
 			}
 		}
@@ -86,12 +83,32 @@ public class Display implements ActionListener {
 	
 	//Launch
 	public static void main(String[] args) throws IOException {
-			//randomly place player
-			player = new Player((int)(Math.random()*MAX_X), (int)(Math.random()*MAX_Y), map);
+		int randomEntities = (int)(Math.random()*10);
+		
+		//randomly place player
+		player = new Player((int)(Math.random()*MAX_X), (int)(Math.random()*MAX_Y), map);
+		
+		//Spawns random entites at random quantities based on randomEntities and randomMobID
+		for(int i = 0; i < randomEntities; i++){
+			int randomMobID = (int)(Math.random()*4);
+			System.out.println(randomMobID);
+			switch (randomMobID){
+				case 1:
+					map.spawnEntity(new Wisp((int)(Math.random()*MAX_X), (int)(Math.random()*MAX_Y), map));
+					break;
+				case 2:
+					map.spawnEntity(new ArtillaryWorm((int)(Math.random()*MAX_X), (int)(Math.random()*MAX_Y), map));
+					break;
+				case 3:
+					map.spawnEntity(new SpikeyNosedMole((int)(Math.random()*MAX_X), (int)(Math.random()*MAX_Y), map));
+					break;
+			}
+		}
 			
-			map.spawnEntity(player);;
-			map.spawnEntity(new SpikeyNosedMole(5,5,map));
+		map.spawnEntity(player);;
 
+		map.spawnEntity(new Wisp((int)(Math.random()*MAX_X), (int)(Math.random()*MAX_Y), map));
+		map.spawnEntity(new Wisp((int)(Math.random()*MAX_X), (int)(Math.random()*MAX_Y), map));
 		new Display();
 	}
 }

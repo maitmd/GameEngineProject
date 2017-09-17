@@ -10,8 +10,17 @@ import com.tumblr.midnightchipmunk.Particle;
 
 public class PoisonPuddle extends Particle{
 
-	boolean switched = false;
 	public PoisonPuddle(int x, int y, Map map) throws IOException{
-		super(x, y, -1, -1, "poison_puddle", ImageIO.read(new File("resources/PoisonPuddle.png")), map, 30);
+		super();
+		
+		setX(x);
+		setY(y);
+		setXOffset(-1);
+		setYOffset(-1);
+		setParticleName("poison_puddle");
+		setImage(ImageIO.read(new File("resources/PoisonPuddle.png")));
+		setMap(map);
+		setRemoveDelay(30);
+		
 	}
 }

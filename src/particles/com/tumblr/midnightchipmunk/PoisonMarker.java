@@ -11,20 +11,16 @@ import com.tumblr.midnightchipmunk.Particle;
 public class PoisonMarker extends Particle{
 
 	public PoisonMarker(int x, int y, Map map) throws IOException{
-		super(x, y, -1, -1, "poison_marker", ImageIO.read(new File("resources/PoisonMarker.png")), map, 20);
-	}
-	
-	public void delayCount(){
-		timer+=1;
+		super();
 		
-		if(timer == removeDelay){
-			try {
-				getMap().removeParticle(this);
-				getMap().spawnParticle(new PoisonPuddle(getX(), getY(), getMap()));
-			} catch (IOException e) {}
-			
-		}
+		setX(x);
+		setY(y);
+		setXOffset(-1);
+		setYOffset(-1);
+		setParticleName("poison_marker");
+		setImage(ImageIO.read(new File("resources/PoisonMarker.png")));
+		setMap(map);
+		setRemoveDelay(30);
 	}
-
 }
 

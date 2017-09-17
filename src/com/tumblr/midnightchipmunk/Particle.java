@@ -1,6 +1,10 @@
 package com.tumblr.midnightchipmunk;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Particle{
 
@@ -14,26 +18,25 @@ public class Particle{
 	protected int removeDelay;
 	protected int timer = 0;
 	
-	public Particle(int x, int y, int xOffset, int yOffset, String particleName, BufferedImage image, Map map, int removeDelay){
-		this.x= (x+1)+xOffset;
-		this.y = (y+1)+yOffset;
-		this.xOffset = xOffset;
-		this.yOffset = yOffset;
-		this.image = image;
-		this.particleName = particleName;
-		this.map = map;
-		this.removeDelay = removeDelay;
-	}
-	
-	public Particle(int x, int y, String particleName, BufferedImage image, Map map, int removeDelay) {
-		this.x= x;
-		this.y = y;
-		this.image = image;
-		this.particleName = particleName;
-		this.map = map;
-		this.removeDelay = removeDelay;
+	public Particle() throws IOException{
+		this.x= 1;
+		this.y = 1;
+		this.xOffset = 0;
+		this.yOffset = 0;
+		this.image = ImageIO.read(new File("resources/Empty.png"));
+		this.particleName = "null";
+		this.map = null;
+		this.removeDelay = 0;
 	}
 
+	public void delayCount(){
+		timer++;
+		
+		if(timer >= removeDelay){
+				getMap().removeParticle(this);
+		}
+	}
+	
 	public BufferedImage getImage(){
 		return image;
 	}
@@ -98,11 +101,11 @@ public class Particle{
 		this.removeDelay = removeDelay;
 	}
 	
-	public void delayCount(){
-		timer+=1;
-		
-		if(timer >= removeDelay){
-			map.removeParticle(x, y);
-		}
+	public void setMap(Map map){
+		this.map = map;
+	}
+	
+	public void setParticleName(String particleName){
+		this.particleName = particleName;
 	}
 }
