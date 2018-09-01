@@ -88,7 +88,7 @@ public class Display implements ActionListener {
 		//randomly place player
 		player = new Player((int)(Math.random()*MAX_X), (int)(Math.random()*MAX_Y), map);
 		
-		//Spawns random entites at random quantities based on randomEntities and randomMobID
+		//Spawns random entities at random quantities based on randomEntities and randomMobID
 		for(int i = 0; i < randomEntities; i++){
 			int randomMobID = (int)(Math.random()*4);
 			System.out.println(randomMobID);
