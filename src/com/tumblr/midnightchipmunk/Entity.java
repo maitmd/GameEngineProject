@@ -76,12 +76,10 @@ public class Entity{
 				entities.add(getMap().getEntityAt((this.getX()+i), (this.getY()+j)));
 				entities.add(getMap().getEntityAt((this.getX()-i), (this.getY()-j)));
 				entities.add(getMap().getEntityAt((this.getX()-i), (this.getY()+j)));
-			}
-		}
-		
-		for(int i = 0; i < entities.size(); i++){
-			if(entities.get(i) == this){
-				entities.set(i, null);
+				
+				if(entities.get(i) == this){
+					entities.set(i, null);
+				}
 			}
 		}
 		
@@ -90,23 +88,12 @@ public class Entity{
 	
 	public void randomMovement()throws IOException{
 		int random = (int)(Math.random()*100);
-		
 		if(random < 5){
 				int moveRandom = (int)(Math.random()*4);
-				switch(moveRandom){
-					case 0:
-						move("up");
-						break;
-					case 1:
-						move("down");
-						break;
-					case 2:
-						move("left");
-						break;
-					case 3:
-						move("right");
-						break;
-					}
+				if(moveRandom == 0){move("up");}
+				else if(moveRandom == 1){move("down");}
+				else if(moveRandom == 2){move("left");}
+				else if(moveRandom == 3){move("right");}
 		}
 	}
 	
@@ -140,6 +127,18 @@ public class Entity{
 				setY(getY()+1);
 			}
 		}
+	}
+	
+	public static String randomFacing(){
+		int random = (int)(Math.random()*4);
+		String facing;
+		
+		if(random == 0){facing = "up";
+		}else if(random == 1){facing = "down";
+		}else if(random == 2){facing = "right";
+		}else{facing = "left";}
+		
+		return facing;
 	}
 	
 	public BufferedImage getImage(){
@@ -204,22 +203,5 @@ public class Entity{
 	
 	public void setMap(Map map){
 		this.map = map;
-	}
-	
-	public static String randomFacing(){
-		int random = (int)(Math.random()*4);
-		String facing;
-		
-		if(random == 0){
-			facing = "up";
-		}else if(random == 1){
-			facing = "down";
-		}else if(random == 2){
-			facing = "right";
-		}else{
-			facing = "left";
-		}
-		
-		return facing;
 	}
 }

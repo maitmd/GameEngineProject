@@ -28,16 +28,7 @@ public class Player extends Entity implements KeyListener{
 		setHealth(2000);
 		setAttack(5);
 		setMap(map);
-		
-		if(getFacing().equals("up")){
-			setImage(ImageIO.read(new File("resources/PlayerUp.png")));
-		}else if(getFacing().equals("down")){
-			setImage(ImageIO.read(new File("resources/PlayerDown.png")));
-		}else if(getFacing().equals("left")){
-			setImage(ImageIO.read(new File("resources/PlayerLeft.png")));
-		}else if(getFacing().equals("right")){
-			setImage(ImageIO.read(new File("resources/PlayerRight.png")));
-		}
+		setImage(ImageIO.read(new File("resources/Player" + randomFacing() + ".png")));
 	}
 	
 	public KeyListener getKeyListener(){

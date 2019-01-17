@@ -29,16 +29,7 @@ public class SpikeyNosedMole extends Entity implements Hostile{
 		setHealth(20);
 		setAttack(5);
 		setMap(map);
-		
-		if(getFacing().equals("up")){
-			setImage(ImageIO.read(new File("resources/SpikeyNosedMoleUpRight.png")));
-		}else if(getFacing().equals("down")){
-			setImage(ImageIO.read(new File("resources/spikeynosedmoleDownRight.png")));
-		}else if(getFacing().equals("left")){
-			setImage(ImageIO.read(new File("resources/spikeynosedmoleLeft.png")));
-		}else if(getFacing().equals("right")){
-			setImage(ImageIO.read(new File("resources/spikeynosedmoleRight.png")));
-		}
+		setImage(ImageIO.read(new File("resources/SpikeyNosedMole" + randomFacing() + ".png")));
 		
 		detectionRadius = 3;
 		attackDelay = 5;

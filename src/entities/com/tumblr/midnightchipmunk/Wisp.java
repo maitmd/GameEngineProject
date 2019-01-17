@@ -31,15 +31,7 @@ public class Wisp extends Entity implements Neutral{
 		
 		this.map = map;
 		
-		if(getFacing().equals("up")){
-			setImage(ImageIO.read(new File("resources/WispUp.png")));
-		}else if(getFacing().equals("down")){
-			setImage(ImageIO.read(new File("resources/WispDown.png")));
-		}else if(getFacing().equals("left")){
-			setImage(ImageIO.read(new File("resources/WispLeft.png")));
-		}else if(getFacing().equals("right")){
-			setImage(ImageIO.read(new File("resources/WispRight.png")));
-		}
+		setImage(ImageIO.read(new File("resources/Wisp" + randomFacing() + ".png")));
 	}
 	
 	public void trigger() throws IOException{

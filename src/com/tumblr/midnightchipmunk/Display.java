@@ -91,7 +91,6 @@ public class Display implements ActionListener {
 		//Spawns random entities at random quantities based on randomEntities and randomMobID
 		for(int i = 0; i < randomEntities; i++){
 			int randomMobID = (int)(Math.random()*4);
-			System.out.println(randomMobID);
 			switch (randomMobID){
 				case 1:
 					map.spawnEntity(new Wisp((int)(Math.random()*MAX_X), (int)(Math.random()*MAX_Y), map));
@@ -108,7 +107,7 @@ public class Display implements ActionListener {
 		map.spawnEntity(player);;
 
 		map.spawnEntity(new Wisp((int)(Math.random()*MAX_X), (int)(Math.random()*MAX_Y), map));
-		map.spawnEntity(new Wisp((int)(Math.random()*MAX_X), (int)(Math.random()*MAX_Y), map));
+		map.spawnEntity(new SpikeyNosedMole((int)(Math.random()*MAX_X), (int)(Math.random()*MAX_Y), map));
 		new Display();
 	}
 }

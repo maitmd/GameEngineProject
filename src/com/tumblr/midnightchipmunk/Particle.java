@@ -32,9 +32,7 @@ public class Particle{
 	public void delayCount(){
 		timer++;
 		
-		if(timer >= removeDelay){
-				getMap().removeParticle(this);
-		}
+		if(timer >= removeDelay){getMap().removeParticle(this);}
 	}
 	
 	public BufferedImage getImage(){
