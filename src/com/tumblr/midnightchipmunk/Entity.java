@@ -87,13 +87,12 @@ public class Entity{
 	}
 	
 	public void randomMovement()throws IOException{
-		int random = (int)(Math.random()*100);
-		if(random < 5){
-				int moveRandom = (int)(Math.random()*4);
-				if(moveRandom == 0){move("up");}
-				else if(moveRandom == 1){move("down");}
-				else if(moveRandom == 2){move("left");}
-				else if(moveRandom == 3){move("right");}
+		if((int)(Math.random()*100) < 5){
+			int moveRandom = (int)(Math.random()*4);
+			if(moveRandom == 0){move("up");}
+			else if(moveRandom == 1){move("down");}
+			else if(moveRandom == 2){move("left");}
+			else if(moveRandom == 3){move("right");}
 		}
 	}
 	
